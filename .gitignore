@@ -30,3 +30,8 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# The following is generated, run sqlc generate instead
+internal/database/db.go
+internal/database/models.go
+internal/database/*.sql.go

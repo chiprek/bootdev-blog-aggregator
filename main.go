@@ -1,10 +1,13 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"os"
 
 	"github.com/chiprek/bootdev-blog-aggregator/internal/config"
+	"github.com/chiprek/bootdev-blog-aggregator/internal/database"
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -13,10 +16,16 @@ func main() {
 		fmt.Printf("failed to read config: %v\n", err)
 		os.Exit(1)
 	}
+	db, err := sql.Open("postgres", cfg.DBUrl)
+	if err != nil {
+		fmt.Printf("Failed to open db connection: %v\n", err)
+		os.Exit(1)
+	}
 
-	s := state{cfg: &cfg}
+	s := state{cfg: &cfg, db: database.New(db)}
 	cmds := commands{cmds: make(map[string]func(*state, command) error)}
 	cmds.register("login", handlerLogin)
+	cmds.register("register", handlerRegister)
 
 	if len(os.Args) < 2 {
 		fmt.Println("Command not specified")
