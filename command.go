@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+)
 
 type commands struct {
 	cmds map[string]func(*state, command) error
@@ -26,4 +29,15 @@ func (c *commands) register(name string, f func(*state, command) error) error {
 	}
 	c.cmds[name] = f
 	return nil
+}
+
+func handlerReset(s *state, cmd command) error {
+	var err error
+
+	err = s.db.ResetUsers(context.Background())
+	if err != nil {
+		return err
+	}
+
+	return err
 }
