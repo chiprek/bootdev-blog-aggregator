@@ -34,8 +34,11 @@ next navigate to the `/sql/schema/` directory and run
 goose postgres "postgres://<db_username>:<password>@<hostadd>:5432/gator" up
 ```
 
-lastly in the root directory eg: `/bootdev-blog-aggregator/` of the project run sqlc to generate the required database related backend code. 
+ now in the root directory eg: `/bootdev-blog-aggregator/` of the project run sqlc to generate the required database related backend code. 
 
+lastly run `go build` to compile the program if so desired.
+
+you can also just run `go run . <comand>` in the project directory if you want to develop new features
 
 ## Configuration
 
