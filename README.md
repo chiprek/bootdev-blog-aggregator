@@ -1,4 +1,4 @@
-#Gator
+# Gator
 A simple Blog aggregator written in Go
 
 ## REQUIREMENTS
