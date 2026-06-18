@@ -31,6 +31,10 @@ func main() {
 	cmds.register("agg", handlerAgg)
 	cmds.register("addfeed", middlewareLoggedIn(handlerAddFeed))
 	cmds.register("feeds", handlerListFeeds)
+	cmds.register("follow", handlerFeedFollow)
+	cmds.register("following", handlerFollowing)
+	cmds.register("unfollow", middlewareLoggedIn(handlerUnfollow))
+	cmds.register("browse", middlewareLoggedIn(handlerBrowse))
 
 	if len(os.Args) < 2 {
 		fmt.Println("Command not specified")
